@@ -453,13 +453,13 @@ class _HomePageState extends State<HomePage> {
                               mainAxisAlignment:
                                   MainAxisAlignment.spaceEvenly,
                               children: [
-                                   IconButton(
-                                  onPressed: () {
-                                    //playPrevious(musicList);
-                                  },
-                                  icon: const Icon(Icons.lyrics,
-                                       color: Colors.white),
-                                ),
+                                  // IconButton(
+                                //   onPressed: () {
+                                //     //playPrevious(musicList);
+                                //   },
+                                //   icon: const Icon(Icons.lyrics,
+                                //        color: Colors.white),
+                                // ),
                                 IconButton(
                                   onPressed: () {
                                     playPrevious(musicList);
