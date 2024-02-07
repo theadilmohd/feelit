@@ -5,7 +5,7 @@ import 'package:my_music/view%20model/recommendations.dart';
 class searchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp(debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Container(
           decoration:const BoxDecoration(
@@ -31,7 +31,7 @@ class searchBar extends StatelessWidget {
               RecentlyPlayed(),
              const  SizedBox(height: 20.0),
               const RecommendationsTitle(title: 'RECOMMENDATIONS'),
-              SongList(),
+              SongContainer(),
               Spacer(),
             ],
           ),

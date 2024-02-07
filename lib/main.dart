@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_music/view%20model/searchBar.dart';
-import 'package:my_music/views/home_page.dart';
+//import 'package:my_music/views/home_page.dart';
 
 
 void main() {
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: searchBar()
+      home:searchBar()
     );
   }
 }
