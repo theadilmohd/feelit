@@ -7,7 +7,21 @@ import 'package:http/http.dart' as http;
 import 'package:my_music/model/apimodel.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final int currentIndex;
+  final List<Welcome> musicList;
+  // final image;
+  // final song;
+  // final artist;
+  // final songname;
+  const HomePage({
+    Key? key,
+    required this.currentIndex,
+    required this.musicList,
+    // required this.image,
+    // required this.artist,
+    // required this.songname,
+    // required this.song
+  }) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -25,8 +39,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  void 
-  playPauseMusic(String url) {
+  void playPauseMusic(String url) {
     if (isPlaying) {
       player.pause();
     } else {
@@ -64,7 +77,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-  final textTheme = Theme.of(context).textTheme;
+    final textTheme = Theme.of(context).textTheme;
+    final int currentIndex = widget.currentIndex;
+    final List<Welcome> musicLists = widget.musicList;
     return Scaffold(
       body: FutureBuilder(
         future: fetchMusic(),
@@ -97,15 +112,20 @@ class _HomePageState extends State<HomePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Icon(
-                            Icons.arrow_back,
-                            color: Colors.white,
+                          InkWell(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Icon(
+                              Icons.arrow_back,
+                              color: Colors.white,
+                            ),
                           ),
                           Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(
-                                musicList[currentIndex].title,
+                                musicLists[currentIndex].title,
                                 style: textTheme.bodyMedium
                                     ?.copyWith(color: Colors.green),
                               ),
@@ -117,7 +137,7 @@ class _HomePageState extends State<HomePage> {
                                     height: 4,
                                   ),
                                   Text(
-                                    musicList[currentIndex].artist,
+                                    musicLists[currentIndex].artist,
                                     style: textTheme.bodyLarge
                                         ?.copyWith(color: Colors.white),
                                   ),
@@ -142,7 +162,7 @@ class _HomePageState extends State<HomePage> {
                               image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: NetworkImage(
-                                    musicList[currentIndex].artwork),
+                                    musicLists[currentIndex].artwork),
                                 alignment: Alignment.topCenter,
                               ),
                             ),
@@ -153,8 +173,7 @@ class _HomePageState extends State<HomePage> {
                         child: Column(
                           children: [
                             Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -169,8 +188,8 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     Text(
                                       musicList[currentIndex].artist,
-                                      style: const TextStyle(
-                                          color: Colors.white),
+                                      style:
+                                          const TextStyle(color: Colors.white),
                                     ),
                                   ],
                                 ),
@@ -203,20 +222,19 @@ class _HomePageState extends State<HomePage> {
                               height: 16,
                             ),
                             Row(
-                             mainAxisAlignment:
-                                 MainAxisAlignment.spaceBetween,
-                                //  crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              //  crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                  IconButton(
+                                IconButton(
                                   onPressed: () {
                                     //playPrevious(musicList);
                                   },
                                   icon: const Icon(Icons.lyrics,
-                                       color: Colors.white),
+                                      color: Colors.white),
                                 ),
                                 IconButton(
                                   onPressed: () {
-                                    playPrevious(musicList);
+                                    playPrevious(musicLists);
                                   },
                                   icon: const Icon(Icons.skip_previous,
                                       size: 36, color: Colors.white),
@@ -224,7 +242,7 @@ class _HomePageState extends State<HomePage> {
                                 IconButton(
                                   onPressed: () {
                                     playPauseMusic(
-                                        musicList[currentIndex].url);
+                                        musicLists[currentIndex].url);
                                   },
                                   icon: Icon(
                                     isPlaying
@@ -236,7 +254,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 IconButton(
                                   onPressed: () {
-                                    playNext(musicList);
+                                    playNext(musicLists);
                                   },
                                   icon: const Icon(Icons.skip_next,
                                       size: 36, color: Colors.white),

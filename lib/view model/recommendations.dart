@@ -5,7 +5,7 @@ import 'package:my_music/views/home_page.dart';
 class RecommendationsTitle extends StatelessWidget {
   final String title;
 
-  const RecommendationsTitle({super.key, required this.title});
+  const RecommendationsTitle({super.key, required this.title}); 
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +81,14 @@ class _SongContainerState extends State<SongContainer> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomePage()));
+                                  builder: (context) => HomePage(
+                                    // image: musicList[index].artwork,
+                                    // song: musicList[index].url,
+                                    // artist: musicList[index].artist,
+                                    // songname:musicList[index].title,
+                                    currentIndex: index,
+                                    musicList:musicList
+                                  )));
                         },
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10.0),
